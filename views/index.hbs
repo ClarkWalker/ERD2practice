@@ -11,6 +11,9 @@
       <h3>{{title}}</h3>
       <h5>Director: {{director}}</h5>
       <h5>Actors: {{actors}}</h5>
+      <form action="/movie/{{movieData.id}}?_method=DELETE" method="post" name="id">
+        <input type="submit" name="{{id}} value"Delete {{title}}>
+      </form>
     {{/each}}
 
     <form action="/addMovie" method="post">

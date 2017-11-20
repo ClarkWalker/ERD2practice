@@ -1,12 +1,12 @@
-const db = require('./connection');
+const knex = require('./connection');
 
 function getMovies() {
-  return db('movies')
+  return knex('movies')
   .join('people', 'movies.director_id', 'people.id');
 }
 
 function getAllActorData() {
-  return db('movies')
+  return knex('movies')
   .join('people_movies', 'people_movies.movie_id', 'movies.id')
   .join('people', 'people_movies.people_id', 'people.id');
 }
@@ -42,8 +42,15 @@ function joinData(dData, aData) {
   return movieArr[0];
 }
 
+function deleteData(id) {
+  return knex('movies')
+  .del()
+  .where('id', id)
+}
+
 module.exports = {
   getMovies,
   getAllActorData,
-  joinData
+  joinData,
+  deleteData
 };

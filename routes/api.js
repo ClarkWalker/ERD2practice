@@ -1,15 +1,15 @@
 const express = require('express');
-const queries = require('../database/queries');
+const db = require('../database/queries');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  queries.getMovies()
+router.get('/', (req, res, next) => {
+  db.getMovies()
   .then((dData) => {
-    queries.getAllActorData()
+    db.getAllActorData()
     .then((aData) => {
       let movieData =
-      queries.joinData(dData, aData);
+      db.joinData(dData, aData);
       /** /
       res.send(movieData);
       /*/
@@ -24,16 +24,16 @@ router.get('/', (req, res) => {
 // router.post('/addMovie', (req,res)=>{
 //   let newMovie = req.body
 //   console.log(newMovie);
-//   queries.checkDirectors(newMovie)
+//   db.checkDirectors(newMovie)
 //   .then(data=>{
 //     if (data.length === 0) {
-//       queries.addDirector(newMovie)
+//       db.addDirector(newMovie)
 //       .then(newId=>{
 //         console.log(newId)
-//         queries.checkActor(newMovie)
+//         db.checkActor(newMovie)
 //         .then(data=>{
 //           if(data.length===0) {
-//             queries.addActor(newMovie)
+//             db.addActor(newMovie)
 //             .then(actId=>{
 //
 //             })
@@ -45,5 +45,9 @@ router.get('/', (req, res) => {
 //   })
 //
 // })
+
+router.delete('/', (req, res, next) => {
+  db.deleteData(req.params.id);
+});
 
 module.exports = router;
