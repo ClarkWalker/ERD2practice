@@ -4,50 +4,22 @@ const db = require('../database/queries');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  db.getMovies()
-  .then((dData) => {
+  db.getAllMovieData()
+  .then((allMovieData) => {
     db.getAllActorData()
-    .then((aData) => {
-      let movieData =
-      db.joinData(dData, aData);
-      /** /
-      res.send(movieData);
-      /*/
-      res.render('index', {
-        movieData: movieData
+    .then((allActorData) => {
+      db.getAllRoleData()
+      .then((allRoleData) => {
+        const allData = {
+          movieData: allMovieData,
+          actorData: allActorData,
+          roleData: allRoleData
+        };
+        console.log(
+          '\nallData\n', allData);
+        res.render('index', allData);
       });
-      /**/
     });
   });
 });
-
-// router.post('/addMovie', (req,res)=>{
-//   let newMovie = req.body
-//   console.log(newMovie);
-//   db.checkDirectors(newMovie)
-//   .then(data=>{
-//     if (data.length === 0) {
-//       db.addDirector(newMovie)
-//       .then(newId=>{
-//         console.log(newId)
-//         db.checkActor(newMovie)
-//         .then(data=>{
-//           if(data.length===0) {
-//             db.addActor(newMovie)
-//             .then(actId=>{
-//
-//             })
-//           }
-//         })
-//       })
-//     }
-//
-//   })
-//
-// })
-
-router.delete('/', (req, res, next) => {
-  db.deleteData(req.params.id);
-});
-
 module.exports = router;
