@@ -33,7 +33,7 @@ function joinData(dData, aData) {
     for (var j = 0; j < movieArr.length; j++) {
       if (aData[i].title === movieArr[j][movieId].title) {
         if (movieObj[movieId].actors.indexOf(aData[i].name) === -1) {
-          movieObj[movieId].actors.push(aData[i].name)
+          movieObj[movieId].actors.push(aData[i].name);
         }
         // console.log('poop');
       }
