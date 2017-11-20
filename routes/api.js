@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     queries.getAllActorData()
     .then((aData) => {
       let movieData =
-      queries.joinData(dData, aData)
+      queries.joinData(dData, aData);
       /** /
       res.send(movieData);
       /*/
@@ -20,9 +20,6 @@ router.get('/', (req, res) => {
     });
   });
 });
-
-
-
 
 // router.post('/addMovie', (req,res)=>{
 //   let newMovie = req.body
@@ -49,4 +46,4 @@ router.get('/', (req, res) => {
 //
 // })
 
-module.exports = router
+module.exports = router;
