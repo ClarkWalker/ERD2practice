@@ -2,10 +2,10 @@
 √ Routes in a routes folder
 √ Postgres database
 √ Knex migrations and seeds
-Knex queries for creating and getting from 2 tables at the same time (joins)
+√ Knex queries for creating and getting from 2 tables at the same time (joins)
 
 √ Creating express server (11/13/17)
 √ Knex migrations and seeds (11/13/17)
 √ Creating express routes get all, create, and get one (11/13/17)
-Knex queries insert and joins (11/13/17 and 11/14/17)
+√ Knex queries insert and joins (11/13/17 and 11/14/17)
 Knex CRUD queries
