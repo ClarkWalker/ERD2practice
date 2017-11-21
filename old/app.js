@@ -11,8 +11,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // for hbs requests other than get and post
-app.use(methodOverride('_method'));
 app.set('view engine', 'hbs');
+app.use(methodOverride('_method'));
 
 app.use('/', routeAPI);
 

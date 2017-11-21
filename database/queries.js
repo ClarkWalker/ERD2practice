@@ -1,11 +1,14 @@
 const knex = require('./connection');
 
-function getAllMovieData() {
-  return knex('movies');
+function getMovies() {
+  return knex('movies')
+  .join('people', 'movies.director_id', 'people.id');
 }
 
 function getAllActorData() {
-  return knex('people');
+  return knex('movies')
+  .join('people_movies', 'people_movies.movie_id', 'movies.id')
+  .join('people', 'people_movies.people_id', 'people.id');
 }
 
 function getPeople() {
@@ -19,20 +22,32 @@ function getAllMovies() {
 function joinData(dData, aData) {
   let movieArr = [];
   let movieObj = new Object();
-}
 
-function getDirectorOfMovie() {
-  return knex('movies')
-  .select()
-//.join('people', 'people.id', 'director_id');
-  .join('people', 'people.id', 'director_id');
-}
+  for (var i = 0; i < aData.length; i++) {
+    let movieId = aData[i]['movie_id'];
+    for (var j = 0; j < dData.length; j++) {
+      if (aData[i].title === dData[j].title) {
+        movieObj[movieId] = new Object();
+        movieObj[movieId].title = dData[j].title;
+        movieObj[movieId].director = dData[j].name;
+        movieObj[movieId].actors = [];
+        movieArr.push(movieObj);
+      }
+    }
+  }
 
-function getActorsInMovie() {
-  return knex('people_movies')
-  .select()
-  .join('people', 'people.id', 'people_id')
-  .join('movies', 'movies.id', 'movie_id')
+  for (var i = 0; i < aData.length; i++) {
+    let movieId = aData[i]['movie_id'];
+    for (var j = 0; j < movieArr.length; j++) {
+      if (aData[i].title === movieArr[j][movieId].title) {
+        if (movieObj[movieId].actors.indexOf(aData[i].name) === -1) {
+          movieObj[movieId].actors.push(aData[i].name);
+        }
+        // console.log('poop');
+      }
+    }
+  }
+  return movieArr[0];
 }
 
 function deleteData(id) {
@@ -64,8 +79,7 @@ function addActorToMovie(data) {
 }
 
 module.exports = {
-  // get data
-  getAllMovieData,
+  getMovies,
   getAllActorData,
   joinData,
   deleteData,

@@ -1,3 +1,4 @@
+// people_movies
 
 exports.up = function(knex, Promise) {
   return Promise.all([
@@ -6,7 +7,7 @@ exports.up = function(knex, Promise) {
       table.integer('people_id').references('people.id').onDelete('CASCADE');
       table.integer('movie_id').references('movies.id').onDelete('CASCADE');
     })
-  ])
+  ]);
 };
 
 exports.down = function(knex, Promise) {

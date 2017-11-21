@@ -7,31 +7,31 @@ exports.seed = function(knex, Promise) {
       return knex('people').insert([
         {
           name: 'Peter Jackson',
-          role: 'director'
+          // role: 'director'
         },
         {
           name: 'Elijah Wood',
-          role: 'actor'
+          // role: 'actor'
         },
         {
           name: 'Orlando Bloom',
-          role: 'actor'
+          // role: 'actor'
         },
         {
           name: 'Zack Braff',
-          role: 'director'
+          // role: 'director'
         },
         {
           name: 'Natalie Portman',
-          role: 'actor'
+          // role: 'actor'
         },
         {
           name: 'James McTeigue',
-          role: 'director'
+          // role: 'director'
         },
         {
           name: 'Hugo Weaving',
-          role: 'actor'
+          // role: 'actor'
         }
 
       ]);
