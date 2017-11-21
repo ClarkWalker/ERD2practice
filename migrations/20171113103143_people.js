@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('people', (table) => {
       table.increments('id');
       table.string('name');
-      table.string('role');
+      // table.string('role');
     })
   ]);
 };

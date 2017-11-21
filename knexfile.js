@@ -5,7 +5,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgrespl://localhost/galvanize_movies_A'
+    connection: 'postgrespl://localhost/actorMovie'
   },
 
   production: {

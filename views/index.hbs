@@ -9,11 +9,13 @@
     <h1>galvanize movies</h1>
   </header>
   <main>
-    <select class="" name="">
-      {{#each movieData}}
-        <option value=""></option>
-      {{/each}}
-    </select>
+
+    {{#each allData.director}}
+      <h2>Title: {{title}}</h2>
+      <h3>Director: {{name}}</h3>
+      <h3>Actors: {{allData.actor}}</h3>
+    {{/each}}
+
   </main>
 </body>
 </html>
