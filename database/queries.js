@@ -11,6 +11,14 @@ function getAllActorData() {
   .join('people', 'people_movies.people_id', 'people.id');
 }
 
+function getPeople() {
+  return knex('people');
+}
+
+function getAllMovies() {
+  return knex('movies');
+}
+
 function joinData(dData, aData) {
   let movieArr = [];
   let movieObj = new Object();
@@ -43,14 +51,43 @@ function joinData(dData, aData) {
 }
 
 function deleteData(id) {
-  return knex('movies')
+  return knex('people_movies')
   .del()
-  .where('id', id)
+  .where('movie_id', id);
+}
+
+function addMovie(data) {
+  return knex('movies')
+  .insert(data)
+}
+
+function addPerson(data) {
+  return knex('people')
+  .insert(data)
+}
+
+function addDirector(data) {
+  return knex('movies')
+  .select()
+  .where('title', data.movie)
+  .update({director_id: data.director})
+}
+
+function addActorToMovie(data) {
+  return knex('people_movies')
+  .insert(data)
 }
 
 module.exports = {
   getMovies,
   getAllActorData,
   joinData,
-  deleteData
+  deleteData,
+
+  addMovie,
+  addPerson,
+  getPeople,
+  getAllMovies,
+  addDirector,
+  addActorToMovie
 };

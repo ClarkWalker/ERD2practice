@@ -6,24 +6,84 @@
   </head>
   <body>
     <h1>Movies</h1>
+    <hr>
 
     {{#each movieData}}
-      <h3>{{title}}</h3>
-      <h5>Director: {{director}}</h5>
-      <h5>Actors: {{actors}}</h5>
-      <form action="/movie/{{movieData.id}}?_method=DELETE" method="post" name="id">
-        <input type="submit" name="{{id}} value"Delete {{title}}>
-      </form>
+      <h2>{{title}}</h2>
+      <h3>Director: {{director}}</h3>
+      <h3>Actors: {{actors}}</h3>
+
+
+
+      <hr>
     {{/each}}
 
+<!-- add a new movie -->
     <form action="/addMovie" method="post">
-      <label>Title</label>
-      <input type="text" name="title" value="">
-      <label>Director</label>
-      <input type="text" name="director" value="">
-      <label>Actor</label>
-      <input type="text" name="role" value="">
-      <button type="submit">Add Movie</button>
+      <label>add movie</label>
+      <input type="text" name="title" placeholder="title">
+      <!-- <input type="submit" name="title" placeholder="add"> -->
+      <button type="submit">add</button>
     </form>
+
+<!-- add a new person -->
+    <form action="/addPerson" method="post">
+      <label>add person</label>
+      <input type="text" name="name" placeholder="name">
+      <!-- <input type="submit" placeholder="add"> -->
+      <button type="submit">add</button>
+    </form>
+
+    <!-- add movie to the on to many between people and movies -->
+    <hr>
+    <form name="addDirector" action="/changeDirector?_method=PUT" method="post">
+      <lable>add director</lable>
+      <select name="director">
+        {{#each people}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+
+      <lable>to movie</lable>
+      <select name="movie">
+        {{#each movies}}
+        <option value="{{title}}">{{title}}</option>
+        {{/each}}
+      </select>
+      <button type="submit">Add</button>
+    </form>
+
+<!-- add actor to the join table -->
+    <hr>
+    <form name="adActor" action="/addActorToMovie" method="post">
+      <lable>add actor</lable>
+      <select name="people_id">
+        {{#each people}}
+          <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+
+      <lable>to movie</lable>
+      <select name="movie_id">
+        {{#each movies}}
+          <option value="{{id}}">{{title}}</option>
+        {{/each}}
+      </select>
+      <button type="submit">Add</button>
+    </form>
+
+<!-- delete movie -->
+    <hr>
+    <form action="/deleteMovie/?_method=DELETE" method="post">
+      <lable>delete movie</lable>
+      <select name="movie_id">
+        {{#each movies}}
+          <option value="{{id}}">{{title}}</option>
+        {{/each}}
+      </select>
+      <button type="submit">Add</button>
+
+    </form>
+
   </body>
 </html>
