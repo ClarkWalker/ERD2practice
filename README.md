@@ -1,4 +1,4 @@
-###Notes on adding a movie
+### Notes on adding a movie
 * type movie title and add it
 * * the movie will not show up on the page yet you have to add a director and an actor to that movie first.
 * add a director to that movie
