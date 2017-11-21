@@ -8,8 +8,17 @@ function getAllActorData() {
   return knex('people');
 }
 
-function getAllRoleData() {
-  return knex('people_movies');
+function getPeople() {
+  return knex('people');
+}
+
+function getAllMovies() {
+  return knex('movies');
+}
+
+function joinData(dData, aData) {
+  let movieArr = [];
+  let movieObj = new Object();
 }
 
 function getDirectorOfMovie() {
@@ -26,17 +35,45 @@ function getActorsInMovie() {
   .join('movies', 'movies.id', 'movie_id')
 }
 
-function movieData(director, actor) {
-  for (var i = 0; i < director.length; i++) {
-    director[i]
-  }
+function deleteData(id) {
+  return knex('people_movies')
+  .del()
+  .where('movie_id', id);
+}
+
+function addMovie(data) {
+  return knex('movies')
+  .insert(data)
+}
+
+function addPerson(data) {
+  return knex('people')
+  .insert(data)
+}
+
+function addDirector(data) {
+  return knex('movies')
+  .select()
+  .where('title', data.movie)
+  .update({director_id: data.director})
+}
+
+function addActorToMovie(data) {
+  return knex('people_movies')
+  .insert(data)
 }
 
 module.exports = {
   // get data
   getAllMovieData,
   getAllActorData,
-  getAllRoleData,
-  getDirectorOfMovie,
-  getActorsInMovie
+  joinData,
+  deleteData,
+
+  addMovie,
+  addPerson,
+  getPeople,
+  getAllMovies,
+  addDirector,
+  addActorToMovie
 };
